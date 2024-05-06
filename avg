@@ -1,0 +1,13 @@
+                        ```aql
+SELECT AVG(sales) FROM `global_superstore_2016_excel _2`;-- first inner query
+
+SELECT SUM(sales) FROM `global_superstore_2016_excel _2`;-- second inner query
+
+SELECT category,
+(SELECT AVG(sales) FROM `global_superstore_2016_excel _2`) AS overall_avg,
+(SELECT ROUND(SUM(sales),2) FROM`global_superstore_2016_excel _2`) AS overall_total_sales,
+ROUND((SELECT ROUND(SUM(sales),2) FROM `global_superstore_2016_excel _2`)
+-
+(SELECT ROUND(AVG(sales),2) FROM`global_superstore_2016_excel _2`),2) as diff_
+FROM `global_superstore_2016_excel _2`
+```
